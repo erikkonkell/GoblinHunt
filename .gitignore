@@ -5,6 +5,9 @@
 [Bb]uilds/
 Assets/AssetStoreTools*
 
+# Ignor Folder
+Goblin/Assets/import*
+
 # Visual Studio cache directory
 .vs/
 
