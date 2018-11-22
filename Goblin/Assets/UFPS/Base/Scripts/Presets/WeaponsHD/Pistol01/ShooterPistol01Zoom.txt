@@ -3,7 +3,7 @@
 ///////////////////////////////////////////////////////////
 
 ComponentType vp_FPWeaponShooter
-ProjectileSpread 1.5
+ProjectileSpread 0.0
 MotionPositionRecoil 0 0 -0.05
 MotionRotationRecoil -2.5 0 3
 MotionRotationRecoilDeadZone 0.5
