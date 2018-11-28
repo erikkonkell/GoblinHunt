@@ -18,7 +18,7 @@ public class StateController : MonoBehaviour {
     [HideInInspector] public float stateTimeElapsed;
     [HideInInspector] public bool isAttacking;
 
-    private Animator animator;
+    [HideInInspector]public Animator animator;
 
 
     private bool aiActive;
@@ -37,6 +37,7 @@ public class StateController : MonoBehaviour {
         if (aiActive)
         {
             navMeshAgent.enabled = true;
+            chaseTarget = FindObjectOfType<vp_FPController>().transform;
         }
 
         else
@@ -51,6 +52,7 @@ public class StateController : MonoBehaviour {
         currentState.UpdateState(this);
         animator.SetBool("isAttacking", isAttacking);
         animator.SetFloat("Speed", navMeshAgent.velocity.magnitude);
+        Debug.Log(chaseTarget.position);
 
     }
 
@@ -60,6 +62,7 @@ public class StateController : MonoBehaviour {
         {
             Gizmos.color = currentState.sceneGizmoColor;
             Gizmos.DrawWireSphere(eyes.position, enemyStats.lookSphereCastRadius);
+            
             
         }
     }
@@ -95,5 +98,15 @@ public class StateController : MonoBehaviour {
         NavMesh.SamplePosition(randomDirection, out navHit, distance, layermask);
 
         return navHit.position;
+    }
+    public void DestroyEvent()
+    {
+        //Destroy(gameObject);
+        GetComponent<vp_DamageHandler>().Die();
+    }
+    public void DeActivateAIEvent()
+    {
+        aiActive = false;
+        navMeshAgent.isStopped = true;
     }
 }

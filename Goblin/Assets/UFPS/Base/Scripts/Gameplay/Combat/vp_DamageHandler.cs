@@ -269,9 +269,17 @@ public class vp_DamageHandler : MonoBehaviour
 		{
 			// send the 'Die' message, to be picked up by vp_DamageHandlers and vp_Respawners
 			if (m_InstaKill)
+            {
+                if (GetComponent<StateController>() != null)
+                    GetComponent<StateController>().animator.SetBool("isAlive", false);
 				SendMessage("Die");
-			else
-				vp_Timer.In(UnityEngine.Random.Range(MinDeathDelay, MaxDeathDelay), delegate() { SendMessage("Die"); });
+            }
+            else
+            {
+                if( GetComponent<StateController>() != null)
+                    GetComponent<StateController>().animator.SetBool("isAlive", false);
+                vp_Timer.In(UnityEngine.Random.Range(MinDeathDelay, MaxDeathDelay), delegate() { SendMessage("Die"); });
+            }
 		}
 
 	}
