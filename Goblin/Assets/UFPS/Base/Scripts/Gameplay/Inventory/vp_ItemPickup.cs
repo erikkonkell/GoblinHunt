@@ -17,7 +17,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System;
 
-[RequireComponent(typeof(SphereCollider))]
+[RequireComponent(typeof(Collider))]
 
 
 [System.Serializable]
