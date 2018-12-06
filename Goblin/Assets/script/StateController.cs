@@ -10,6 +10,8 @@ public class StateController : MonoBehaviour {
     public EnemyStats enemyStats;
     public Transform eyes;
     public State remainState;
+    public RangeWeaponAttack rangeAttackObject;
+    public Transform rangeAttackStartPos;
 
     [HideInInspector] public NavMeshAgent navMeshAgent;
     [HideInInspector] public List<Transform> wayPointList;
@@ -17,6 +19,7 @@ public class StateController : MonoBehaviour {
     [HideInInspector] public Transform chaseTarget;
     [HideInInspector] public float stateTimeElapsed;
     [HideInInspector] public bool isAttacking;
+    [HideInInspector] public bool isRangeAttacking;
 
     [HideInInspector]public Animator animator;
 
@@ -51,8 +54,8 @@ public class StateController : MonoBehaviour {
             return;
         currentState.UpdateState(this);
         animator.SetBool("isAttacking", isAttacking);
+        animator.SetBool("isRangeAttacking", isRangeAttacking);
         animator.SetFloat("Speed", navMeshAgent.velocity.magnitude);
-        Debug.Log(chaseTarget.position);
 
     }
 
@@ -85,6 +88,7 @@ public class StateController : MonoBehaviour {
     private void OnExitState()
     {
         stateTimeElapsed = 0;
+        navMeshAgent.speed = 4;
         isAttacking = false;
     }
 
@@ -104,9 +108,21 @@ public class StateController : MonoBehaviour {
         //Destroy(gameObject);
         GetComponent<vp_DamageHandler>().Die();
     }
+    public void CreateRangeProjectile()
+    {
+        RangeWeaponAttack go = Instantiate(rangeAttackObject, rangeAttackStartPos.position, Quaternion.identity);
+        go.Instantiate(chaseTarget.position);
+    }
     public void DeActivateAIEvent()
     {
         aiActive = false;
         navMeshAgent.isStopped = true;
+    }
+
+    public void RotateTowards(Transform target)
+    {
+        Vector3 direction = (target.position - transform.position).normalized;
+        Quaternion lookRotation = Quaternion.LookRotation(direction);
+        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 360);
     }
 }
