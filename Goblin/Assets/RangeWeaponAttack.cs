@@ -7,6 +7,8 @@ public class RangeWeaponAttack : MonoBehaviour {
     public Vector3 Target;
     public float damage;
     public float speed;
+    [Tooltip("Higher number gives more spray")]
+    public float accuracy;
     //public bool collisionActive = false;
 
     private void Start()
@@ -30,9 +32,9 @@ public class RangeWeaponAttack : MonoBehaviour {
     public void Instantiate(Vector3 target)
     {
         Target = target;
-        Target.y += Random.Range(1f,1f);
-        Target.x += Random.Range(1f, 1f);
-        Target.z += Random.Range(1f, 1f);
+        Target.y += Random.Range(-accuracy, accuracy);
+        Target.x += Random.Range(-accuracy, accuracy);
+        Target.z += Random.Range(-accuracy, accuracy);
     }
     private void OnCollisionEnter(Collision collision)
     {

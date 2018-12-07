@@ -272,13 +272,15 @@ public class vp_DamageHandler : MonoBehaviour
             {
                 if (GetComponent<StateController>() != null)
                     GetComponent<StateController>().animator.SetBool("isAlive", false);
-				SendMessage("Die");
+                else
+				    SendMessage("Die");
             }
             else
             {
                 if( GetComponent<StateController>() != null)
                     GetComponent<StateController>().animator.SetBool("isAlive", false);
-                vp_Timer.In(UnityEngine.Random.Range(MinDeathDelay, MaxDeathDelay), delegate() { SendMessage("Die"); });
+                else
+                    vp_Timer.In(UnityEngine.Random.Range(MinDeathDelay, MaxDeathDelay), delegate() { SendMessage("Die"); });
             }
 		}
 
