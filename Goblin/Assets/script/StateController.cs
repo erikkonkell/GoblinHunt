@@ -6,20 +6,21 @@ using UnityEngine.AI;
 [RequireComponent(typeof(vp_DamageHandler))]
 public class StateController : MonoBehaviour {
 
-    public State currentState;
     public EnemyStats enemyStats;
-    public Transform eyes;
-    public State remainState;
     public RangeWeaponAttack rangeAttackObject;
+    public State currentState;
+    public State remainState;
+    public Transform eyes;
     public Transform rangeAttackStartPos;
 
     [HideInInspector] public NavMeshAgent navMeshAgent;
     [HideInInspector] public List<Transform> wayPointList;
-    [HideInInspector] public int nextWayPoint;
     [HideInInspector] public Transform chaseTarget;
+    [HideInInspector] public int nextWayPoint;
+    [HideInInspector] public float currentHealthLastFrame;
     [HideInInspector] public float stateTimeElapsed;
     [HideInInspector] public bool isAttacking;
-    [HideInInspector] public bool isRangeAttacking;
+    [HideInInspector] public bool isRangeAttacking = false;
 
     [HideInInspector]public Animator animator;
 
@@ -30,6 +31,13 @@ public class StateController : MonoBehaviour {
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
+    }
+    private void Start()
+    {
+        currentHealthLastFrame = GetComponent<vp_DamageHandler>().CurrentHealth;
+        isRangeAttacking = false;
+        isAttacking = false;
+        currentState.SetupState(this);
     }
 
     public void SetupAI(bool aiAcrivationFromEnemyManager, List<Transform> wayPointsFromEnemyManager)
@@ -75,7 +83,9 @@ public class StateController : MonoBehaviour {
         if(nextState != remainState)
         {
             currentState = nextState;
+            Debug.Log(currentState.name);
             OnExitState();
+            currentState.SetupState(this);
         }
     }
 
@@ -88,8 +98,8 @@ public class StateController : MonoBehaviour {
     private void OnExitState()
     {
         stateTimeElapsed = 0;
-        navMeshAgent.speed = 4;
         isAttacking = false;
+        isRangeAttacking = false;
     }
 
     public Vector3 RandomNavSphere(Vector3 origin, float distance, int layermask = -1)

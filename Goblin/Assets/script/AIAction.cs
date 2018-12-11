@@ -5,4 +5,5 @@ using UnityEngine;
 public abstract class AIAction : ScriptableObject {
 
     public abstract void Act(StateController controller);
+    public abstract void Setup(StateController controller);
 }

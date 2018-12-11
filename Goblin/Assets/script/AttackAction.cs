@@ -11,6 +11,12 @@ public class AttackAction : AIAction
         Attack(controller);
         StateController = controller;
     }
+
+    public override void Setup(StateController controller)
+    {
+        
+    }
+
     private void Attack(StateController controller)
     {
         controller.isAttacking = true;

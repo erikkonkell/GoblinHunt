@@ -9,10 +9,14 @@ public class RangeAttackAction : AIAction
     {
         Attack(controller);
     }
+
+    public override void Setup(StateController controller)
+    {
+    }
+
     private void Attack(StateController controller)
     {
         controller.isRangeAttacking = true;
-        controller.navMeshAgent.speed = 0;
         controller.RotateTowards(controller.chaseTarget);
         
     }

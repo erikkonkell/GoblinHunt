@@ -5,13 +5,26 @@ using UnityEngine;
 [CreateAssetMenu ( menuName = "PluggableAI/State")]
 public class State : ScriptableObject {
 
+    public float speed;
     public AIAction[] actions;
     public Transition[] transitions;
     public Color sceneGizmoColor = Color.gray;
+    
     public void UpdateState(StateController controller)
     {
-        DoActions(controller);
+        if(actions.Length > 0)
+            DoActions(controller);
         CheckTransitions(controller);
+    }
+    public void SetupState(StateController controller)
+    {
+        SetSpeed(controller);
+        SetAction(controller);
+    }
+
+    private void SetSpeed(StateController controller)
+    {
+        controller.navMeshAgent.speed = speed;
     }
 
     private void DoActions(StateController controller)
@@ -20,6 +33,15 @@ public class State : ScriptableObject {
         {
             actions[i].Act(controller);
         }
+    }
+
+    private void SetAction(StateController controller)
+    {
+        if(actions != null && actions.Length > 0)
+            for (int i = 0; i < actions.Length; i++)
+            {
+                actions[i].Setup(controller);
+            }
     }
 
     private void CheckTransitions(StateController controller)

@@ -9,6 +9,12 @@ public class PatrolAction : AIAction {
     {
         Patrol(controller);
     }
+
+    public override void Setup(StateController controller)
+    {
+        
+    }
+
     private void Patrol(StateController controller)
     {
         controller.navMeshAgent.destination = controller.wayPointList[controller.nextWayPoint].position;
