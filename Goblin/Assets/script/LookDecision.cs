@@ -4,7 +4,7 @@ using UnityEngine;
 
 [CreateAssetMenu(menuName = "PluggableAI/Decisions/Look")]
 public class LookDecision : Decision {
-
+    public bool willIgnoreAI;
     public override bool Decide(StateController controller)
     {
         bool targetVisivle = Look(controller);
@@ -22,15 +22,59 @@ public class LookDecision : Decision {
         //    controller.chaseTarget = hit.transform;
         //    return true;
         //}
-        if(Physics.Raycast(controller.eyes.position,controller.eyes.TransformDirection(Vector3.forward),out hit, controller.enemyStats.lookRange)
-            && hit.collider.CompareTag("Player"))
+        if (willIgnoreAI)
         {
-            controller.chaseTarget = hit.transform;
-            return true;
+            int layerMask = 1 << 10;
+            layerMask = ~layerMask;
+            if(Physics.SphereCast(controller.eyes.position, controller.enemyStats.lookSphereCastRadius, controller.eyes.forward, out hit,controller.enemyStats.lookRange,layerMask)
+                && hit.collider.CompareTag("Player"))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
         else
         {
-            return false;
+            if (Physics.SphereCast(controller.eyes.position, controller.enemyStats.lookSphereCastRadius, controller.eyes.forward, out hit, controller.enemyStats.lookRange)
+                && hit.collider.CompareTag("Player"))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
+        //normal raycast fail when player moves keep switching states
+
+        //if(willIgnoreAI)
+        //{
+        //    if(Physics.Raycast(controller.eyes.position,controller.eyes.TransformDirection(Vector3.forward),out hit, controller.enemyStats.lookRange,layerMask)
+        //        && hit.collider.CompareTag("Player"))
+        //    {
+        //        controller.chaseTarget = hit.transform;
+        //        return true;
+        //    }
+        //    else
+        //    {
+        //        return false;
+        //    }
+        //}
+        //else
+        //{
+        //    if (Physics.Raycast(controller.eyes.position, controller.eyes.TransformDirection(Vector3.forward), out hit, controller.enemyStats.lookRange)
+        //        && hit.collider.CompareTag("Player"))
+        //    {
+        //        controller.chaseTarget = hit.transform;
+        //        return true;
+        //    }
+        //    else
+        //    {
+        //        return false;
+        //    }
+        //}
     }
 }

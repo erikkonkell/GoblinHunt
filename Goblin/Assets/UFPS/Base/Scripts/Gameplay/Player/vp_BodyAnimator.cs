@@ -825,7 +825,7 @@ public class vp_BodyAnimator : MonoBehaviour
 			// get max speed of first vp_FPController that we can find under the ancestor
 			vp_FPController controller = Transform.root.GetComponentInChildren<vp_FPController>();
 			m_MaxWalkSpeed = controller.CalculateMaxSpeed();
-			m_MaxRunSpeed = controller.CalculateMaxSpeed("Run");
+			//m_MaxRunSpeed = controller.CalculateMaxSpeed("Run");
 			m_MaxCrouchSpeed = controller.CalculateMaxSpeed("Crouch");
 			//Debug.Log("m_MaxWalkSpeed: " + m_MaxWalkSpeed + ", m_MaxRunSpeed: " + m_MaxRunSpeed + ", m_MaxCrouchSpeed: " + m_MaxCrouchSpeed);
 		}

@@ -10,6 +10,11 @@ public class WonderAction : AIAction
         Wonder(controller);
     }
 
+    public override void Setup(StateController controller)
+    {
+        
+    }
+
     private void Wonder( StateController controller)
     {
         if(controller.navMeshAgent.remainingDistance <= controller.navMeshAgent.stoppingDistance && !controller.navMeshAgent.pathPending)

@@ -15,5 +15,10 @@ public class ChaseAction : AIAction
         controller.navMeshAgent.destination = controller.chaseTarget.position;
         controller.navMeshAgent.isStopped = false;
     }
+
+    public override void Setup(StateController controller)
+    {
+
+    }
 }
 

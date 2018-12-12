@@ -12,6 +12,8 @@ public class Eye : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        transform.LookAt(playerTransform.transform);
+        Vector3 playerPos = playerTransform.position;
+        playerPos.y += 1f;
+        transform.LookAt(playerPos);
 	}
 }

@@ -60,7 +60,7 @@ public sealed class vp_Layer
 								(1 << IgnoreBullets) | (1 << Trigger) | (1 << Water) | (1 << Pickup));
 		 
 	}
-
+    
 
 	/// <summary>
 	///
@@ -70,7 +70,7 @@ public sealed class vp_Layer
 		Physics.IgnoreLayerCollision(LocalPlayer, Debris);		// player should never collide with small debris
 		Physics.IgnoreLayerCollision(Debris, Debris);			// gun shells should not collide against each other
 		Physics.IgnoreLayerCollision(Ragdoll, RemotePlayer);
-	}
+    }
 	private vp_Layer(){}
 
 
