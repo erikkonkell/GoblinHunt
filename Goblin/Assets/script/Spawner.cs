@@ -14,9 +14,9 @@ public class Spawner : MonoBehaviour
         {
             foreach (StateController controller in spawnAI)
             {
-                StateController sc = Instantiate<StateController>(controller);
+                StateController sc = Instantiate<StateController>(controller, aiStartPos);
                 sc.SetupAI(true, wayPoints);
-                sc.transform.position = aiStartPos.position;
+                sc.transform.parent = null;
             }
             Debug.Log("Enemies has spawned!!");
 
@@ -28,10 +28,9 @@ public class Spawner : MonoBehaviour
         {
             foreach (StateController controller in spawnAI)
             {
-                StateController sc = Instantiate<StateController>(controller);
+                StateController sc = Instantiate<StateController>(controller,aiStartPos);
                 sc.SetupAI(true,wayPoints);
-                sc.transform.position = aiStartPos.position;
-                Debug.Log("Enemies has spawned!!");
+                sc.transform.parent = null;
             }
             Debug.Log("Enemies has spawned!!");
 
