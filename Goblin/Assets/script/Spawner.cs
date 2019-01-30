@@ -31,6 +31,7 @@ public class Spawner : MonoBehaviour
                 StateController sc = Instantiate<StateController>(controller);
                 sc.SetupAI(true,wayPoints);
                 sc.transform.position = aiStartPos.position;
+                Debug.Log("Enemies has spawned!!");
             }
             Debug.Log("Enemies has spawned!!");
 
