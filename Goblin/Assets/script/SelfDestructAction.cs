@@ -7,7 +7,7 @@ public class SelfDestructAction : AIAction
 {
     public override void Act(StateController controller)
     {
-        controller.GetComponent<vp_DamageHandler>().Damage(Mathf.Infinity);
+        controller.GetComponent<vp_DamageHandler>().Damage(100);
     }
 
     public override void Setup(StateController controller)
