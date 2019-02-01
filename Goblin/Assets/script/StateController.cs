@@ -135,4 +135,12 @@ public class StateController : MonoBehaviour {
         Quaternion lookRotation = Quaternion.LookRotation(direction);
         transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 360);
     }
+    public bool LostHealth()
+    {
+        if (currentHealthLastFrame < GetComponent<vp_DamageHandler>().CurrentHealth)
+            return true;
+        else
+            return false;
+    }
+
 }

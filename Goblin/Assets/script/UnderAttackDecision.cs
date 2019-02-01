@@ -11,7 +11,7 @@ public class UnderAttackDecision : Decision
     }
     private bool UnderAttack(StateController controller)
     {
-        if(controller.currentHealthLastFrame > controller.GetComponent<vp_DamageHandler>().CurrentHealth)
+        if(controller.LostHealth())
         {
             controller.currentHealthLastFrame = controller.GetComponent<vp_DamageHandler>().CurrentHealth;
             return true;
