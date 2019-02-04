@@ -32,7 +32,7 @@ public class RangeWeaponAttack : MonoBehaviour {
     public void Instantiate(Vector3 target)
     {
         Target = target;
-        Target.y += Random.Range(-accuracy, accuracy);
+        Target.y += Random.Range(-accuracy * 0.5f, accuracy * 0.5f);
         Target.x += Random.Range(-accuracy, accuracy);
         Target.z += Random.Range(-accuracy, accuracy);
     }

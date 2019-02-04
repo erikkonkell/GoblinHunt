@@ -7,6 +7,7 @@ public class EnemyStats : ScriptableObject {
 
     public float moveSpeed = 1;
     public float lookRange = 40;
+    public float fieldOfViewAngle = 120;
     public float lookSphereCastRadius = 1;
 
     public float attackRange = 1;
