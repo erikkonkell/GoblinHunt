@@ -45,6 +45,7 @@ public class RangeWeaponAttack : MonoBehaviour {
         }
         //collisionActive = true;
         Destroy(this.gameObject);
+
     }
     private void OnTriggerEnter(Collider other)
     {
