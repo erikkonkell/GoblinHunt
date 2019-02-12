@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Spawner : MonoBehaviour
 {
+    public bool destroyAfterUse;
     public List<StateController> spawnAI;
     public List<Transform> wayPoints;
 
@@ -18,6 +19,8 @@ public class Spawner : MonoBehaviour
                 sc.SetupAI(true, wayPoints);
                 sc.transform.parent = null;
             }
+            if (destroyAfterUse)
+                Destroy(this.gameObject);
             Debug.Log("Enemies has spawned!!");
 
         }
@@ -32,6 +35,8 @@ public class Spawner : MonoBehaviour
                 sc.SetupAI(true,wayPoints);
                 sc.transform.parent = null;
             }
+            if (destroyAfterUse)
+                Destroy(this.gameObject);
             Debug.Log("Enemies has spawned!!");
 
         }
