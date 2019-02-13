@@ -24,11 +24,11 @@ public class AttackAction : AIAction
         //if (Physics.SphereCast(controller.eyes.position, controller.enemyStats.lookSphereCastRadius, controller.eyes.forward, out hit, controller.enemyStats.attackRange)
         //    && hit.collider.CompareTag("Player"))
         //{
-            if (controller.CheckIfCountDownElapsed(controller.enemyStats.attackRate))
-            {
-                controller.chaseTarget.gameObject.GetComponentInParent<vp_DamageHandler>().Damage(controller.enemyStats.attackDamage);
-                controller.stateTimeElapsed = 0;
-            }
+            //if (controller.CheckIfCountDownElapsed(controller.enemyStats.attackRate))
+            //{
+            //    controller.chaseTarget.gameObject.GetComponentInParent<vp_DamageHandler>().Damage(controller.enemyStats.attackDamage);
+            //    controller.stateTimeElapsed = 0;
+            //}
         //}
     }
     private void OnDrawGizmos()
