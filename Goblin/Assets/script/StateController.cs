@@ -64,6 +64,7 @@ public class StateController : MonoBehaviour {
         animator.SetBool("isAttacking", isAttacking);
         animator.SetBool("isRangeAttacking", isRangeAttacking);
         animator.SetFloat("Speed", navMeshAgent.velocity.magnitude);
+        animator.SetFloat("AttackDistants", Vector3.Distance(chaseTarget.position, transform.position));
 
     }
 
@@ -141,6 +142,18 @@ public class StateController : MonoBehaviour {
             return true;
         else
             return false;
+    }
+
+    public void DamageOnAnimation(int damage)
+    {
+        if(damage == 0)
+        {
+            chaseTarget.gameObject.GetComponentInParent<vp_DamageHandler>().Damage(enemyStats.attackDamage);
+        }
+        else
+        {
+            chaseTarget.gameObject.GetComponentInParent<vp_DamageHandler>().Damage(damage);
+        }
     }
 
 }

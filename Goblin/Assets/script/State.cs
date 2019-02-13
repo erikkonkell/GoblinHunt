@@ -6,9 +6,11 @@ using UnityEngine;
 public class State : ScriptableObject {
 
     public float speed;
+    public bool needAllTransitions = false;
     public AIAction[] actions;
     public Transition[] transitions;
     public Color sceneGizmoColor = Color.gray;
+    
     
     public void UpdateState(StateController controller)
     {
@@ -46,18 +48,36 @@ public class State : ScriptableObject {
 
     private void CheckTransitions(StateController controller)
     {
-        for (int i = 0; i < transitions.Length; i++)
-        {
-            bool deciisionSucceeded = transitions[i].decision.Decide(controller);
+        if(!needAllTransitions)
+            for (int i = 0; i < transitions.Length; i++)
+            {
+                bool deciisionSucceeded = transitions[i].decision.Decide(controller);
 
-            if (deciisionSucceeded)
-            {
-                controller.TransitionToState(transitions[i].trueState);
+                if (deciisionSucceeded)
+                {
+                    controller.TransitionToState(transitions[i].trueState);
+                }
+                else
+                {
+                    controller.TransitionToState(transitions[i].falseState);
+                }
             }
-            else
+        //if you need all transitions to be true to move to next state
+        //all transitions need to have remainInState on false
+        else
+        {
+            
+            for (int i = 0; i < transitions.Length; i++)
             {
-                controller.TransitionToState(transitions[i].falseState);
+                bool deciisionSucceeded = transitions[i].decision.Decide(controller);
+
+                if (!deciisionSucceeded)
+                {
+                    controller.TransitionToState(transitions[i].falseState);
+                    break;
+                }
             }
+            controller.TransitionToState(transitions[0].trueState);
         }
     }
 }
