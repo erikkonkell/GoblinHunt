@@ -66,18 +66,18 @@ public class State : ScriptableObject {
         //all transitions need to have remainInState on false
         else
         {
-            
+            bool change = true;
             for (int i = 0; i < transitions.Length; i++)
             {
-                bool deciisionSucceeded = transitions[i].decision.Decide(controller);
-
-                if (!deciisionSucceeded)
+                if (!transitions[i].decision.Decide(controller))
                 {
-                    controller.TransitionToState(transitions[i].falseState);
-                    break;
+                    change = false;
                 }
             }
-            controller.TransitionToState(transitions[0].trueState);
+            if(change)
+                controller.TransitionToState(transitions[0].trueState);
+            else
+                controller.TransitionToState(transitions[0].falseState);
         }
     }
 }
