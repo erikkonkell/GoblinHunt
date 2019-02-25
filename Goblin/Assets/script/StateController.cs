@@ -8,6 +8,8 @@ public class StateController : MonoBehaviour {
 
     public EnemyStats enemyStats;
     public RangeWeaponAttack rangeAttackObject;
+    public Collider AoeZone;
+    public Transform AoeZoneLookAt;
     public State currentState;
     public State remainState;
     public Transform eyes;
@@ -26,7 +28,6 @@ public class StateController : MonoBehaviour {
 
 
     private bool aiActive;
-
     void Awake()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
@@ -74,8 +75,8 @@ public class StateController : MonoBehaviour {
         {
             Gizmos.color = currentState.sceneGizmoColor;
             Gizmos.DrawWireSphere(eyes.position, enemyStats.lookSphereCastRadius);
-            
-            
+            //Gizmos.DrawWireCube(colitionTransform.position, colitionTransform.localScale);
+
         }
     }
 
@@ -154,6 +155,14 @@ public class StateController : MonoBehaviour {
         {
             chaseTarget.gameObject.GetComponentInParent<vp_DamageHandler>().Damage(damage);
         }
+    }
+    public void CreateAoeDamageCollider(float damage)
+    {
+        GameObject go = Instantiate(AoeZone, rangeAttackStartPos.position, Quaternion.identity,rangeAttackStartPos).gameObject;
+        if(damage == 0)
+            go.GetComponent<AoeAttack>().spawnGamgeObject(enemyStats.attackDamage,AoeZoneLookAt);
+        else
+            go.GetComponent<AoeAttack>().spawnGamgeObject(damage, AoeZoneLookAt);
     }
 
 }
