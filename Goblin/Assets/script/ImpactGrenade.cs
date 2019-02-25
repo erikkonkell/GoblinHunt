@@ -20,6 +20,7 @@ public class ImpactGrenade : MonoBehaviour
         //Physics.GetIgnoreLayerCollision(24, 30);
         //Physics.GetIgnoreLayerCollision(24, 27);
         Physics.IgnoreCollision(grenadeCol, FindObjectOfType<vp_FPController>().GetComponentInChildren<vp_DamageTransfer>().GetComponent<Collider>());
+
     }
     private void OnCollisionEnter(Collision col)
     {
@@ -44,7 +45,8 @@ public class ImpactGrenade : MonoBehaviour
 	protected virtual void Awake()
 	{
 		m_Rigidbody = GetComponent<Rigidbody>();
-	}
+
+    }
 
 
 	/// <summary>
