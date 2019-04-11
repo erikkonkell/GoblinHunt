@@ -26,6 +26,7 @@ public class StateController : MonoBehaviour {
 
     [HideInInspector]public Animator animator;
 
+    
 
     private bool aiActive;
     void Awake()
@@ -124,6 +125,7 @@ public class StateController : MonoBehaviour {
     {
         RangeWeaponAttack go = Instantiate(rangeAttackObject, rangeAttackStartPos.position, Quaternion.identity);
         go.Instantiate(chaseTarget.position);
+
     }
     public void DeActivateAIEvent()
     {
@@ -155,6 +157,7 @@ public class StateController : MonoBehaviour {
         {
             chaseTarget.gameObject.GetComponentInParent<vp_DamageHandler>().Damage(damage);
         }
+
     }
     public void CreateAoeDamageCollider(float damage)
     {
